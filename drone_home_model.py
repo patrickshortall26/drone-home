@@ -5,7 +5,6 @@
 # Model design
 import agentpy as ap
 import numpy as np
-from math import pi
 
 # Visualization
 from matplotlib import animation
@@ -90,9 +89,13 @@ class DroneHomeDrone(ap.Agent):
             if distance > 0:
                 v3 += (10/distance)*normalize(displacement)
 
+        # Velocity 4 - Drift
+        v4 = np.zeros(2)
+        #v4[0] = 0.01
+
         # Add velocities to current velocity and normalise
         
-        self.velocity = normalize(self.velocity + v1 + v2 + v3)
+        self.velocity = normalize(self.velocity + v1 + v2 + v3 + v4)
 
 
     def update_position(self):
@@ -134,8 +137,8 @@ class DroneHomeModel(ap.Model):
         self.agents.setup_pos(self.space)
         # Setup a counter so that agents can change velocity randomly every ten seconds
         self.counter = 0
-        # Set up person at a random point in the sea
-        self.person = self.model.nprandom.random(2)*self.p.size
+        # Set up person at a random point in the sea (in the second horizontal quarter)
+        self.person = np.array((self.random.uniform(0.25,0.5), self.random.random()))*self.p.size
 
     def step(self):
         """ 
@@ -148,7 +151,7 @@ class DroneHomeModel(ap.Model):
         # Move into new direction
         self.agents.update_position()
         # Move the person along with the drift
-        
+        self.person[0] += 0.2 # Due east
         # Add one to the counter
         self.counter += 1
     

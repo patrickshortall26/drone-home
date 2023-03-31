@@ -17,7 +17,7 @@ sim_parameters = {
     'steps': 10000,
     'population' : 10,
     'detection_radius' : 50,
-    'camera_radius' : 5
+    'camera_radius' : 7,
 }
 
 # Run simulation and collect data for animation and analysis
