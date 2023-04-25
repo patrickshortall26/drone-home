@@ -40,7 +40,7 @@ fig, ax = plt.subplots(figsize=(5,5))
 
 ax.set_facecolor('b')
 
-uavs, = ax.plot([], [], 'wo', markersize=1)
+uavs, = ax.plot([], [], 'w-', markersize=1)
 person, = ax.plot([], [], 'rX')
 time_text = ax.text(0.05, 0.95,'')
 search_space = Rectangle((data["search_center"][0][0]-(model.p.size/6 + 5), data["search_center"][0][1]-(model.p.size/6 + 5)),model.p.size/3,model.p.size/3,
@@ -80,7 +80,7 @@ def animate(save = False):
                     init_func=init, blit=True, 
                     interval=20, repeat=True)
     if save:
-        ani.save("RWWD_other.mp4", progress_callback = lambda i, n: print(f'Saving frame {i} of {n}'))
+        ani.save("cool_lines.mp4", progress_callback = lambda i, n: print(f'Saving frame {i} of {n}'))
 
     plt.show()
 
